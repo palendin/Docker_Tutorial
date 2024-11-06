@@ -1,0 +1,18 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--makeke it responsive, adjust layout base on screen size-->
+    <title>Login</title>
+</head>
+<body>
+    <h2>Login</h2>
+    <form action="/login" method="POST"> <!-- create a form tag for fill/submit, sents data to /login route in app.py using POST method-->
+        <label for="username">Username:</label><br>
+        <input type="text" id="username" name="username"><br><br> <!-- create input tag for user to type text format, with id referring to 'for' = "username", and name attribute is used to pass the information to server when form is submitted, so server side (Flask app)  needs to reference this name to extract  the form data-->
+        <label for="password">Password:</label><br>
+        <input type="password" id="password" name="password"><br><br>
+        <input type="submit" value="Login"> <!-- type is submit button, and value is what shows on button-->
+    </form>
+</body>
+</html>

@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    ports:
+      - "5000:5000"
+#     environment:
+#       # Replace with your actual secret key
+#       FLASK_SECRET_KEY: your_secret_key
+
+# volumes:
+#   # Mount your local .env file to the container (optional)
+#   - .env:/app/.env:ro
