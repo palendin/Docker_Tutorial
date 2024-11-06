@@ -1,0 +1,42 @@
+<!-- creating boxes for entry in the form, this connects to base.html-->
+{% extends 'base.html' %}
+
+<!--block tag, by providing block’s name as an argument, you’re connecting the blocks from the child template with the blocks from the parent template.-->
+{% block header %}
+  <h2>{% block title %}Add Post{% endblock title %}</h2>
+{% endblock header %}
+
+<!--Inside the content block is the form section, or the HTML markup for a form that asks for a name and a message.-->
+{% block content %} 
+  <form method="post"> <!-- form is submitted via POST method (data will be sent to the server, and Flask will process it via request.form) -->
+
+    <!-- Author Entry Box (Text Input):-->
+    <div class="form-group">
+        <label for="author">Your Name</label>
+        <input type="text" name="author" id="author" value="{{ request.form['author'] }}" class="form-control">  
+    </div>
+
+     <!-- The type="text" makes it a text input field. 
+      name="author" is the key that will be used to send the value to the server. {"author": "User's entered name"}
+      id="author" links it to the label, and helps with JavaScript or CSS styling.
+      In value="{{ request.form['author'] }}",'author' refers to the name="author" attribute. request.form is the key from name="author", request.form['author'] retrieves the value
+      value="{{ request.form['author'] }}" ensures that the value the user entered ("John Doe") is retained in the input box
+      form-control class is a Bootstrap class that styles the input to look nice and consistent. -->
+
+
+    <!-- Message Entry Box (Text Input):-->
+    <div class="form-group">
+        <label for="message">Your Message</label>
+        <textarea name="message" id="message" class="form-control">{{ request.form['message'] }}</textarea>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="form-group">
+        <input type="submit" value="Post Message" class="submit-btn">
+    </div>
+</form>
+{% endblock content %}
+
+<!-- GET: Used to display the form to create a post.
+POST: Used to submit the form and create a new post on the server.
+if html has input box and submit button, get and post should be used-->

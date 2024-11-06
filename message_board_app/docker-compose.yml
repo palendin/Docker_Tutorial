@@ -1,0 +1,39 @@
+version: '3'
+services:
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: runescape
+      POSTGRES_DB: postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - app_network  # Explicitly assign to app_network
+    volumes:
+      - postgres_data:/var/lib/postgresql/data  # Persist PostgreSQL data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 10s
+      retries: 5
+
+
+  message_board_app:
+    build: .
+    env_file: 
+      - .env
+    ports:
+      - "8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - app_network  # Explicitly assign to app_network
+
+networks:
+  app_network:
+    driver: bridge  # Define a bridge network
+
+volumes:
+  postgres_data:

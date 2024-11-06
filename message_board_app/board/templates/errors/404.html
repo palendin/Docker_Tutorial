@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{% block title %}{% endblock title %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Page Not Found</h1>
+    <p>The requested page could not be found.</p>
+    <p>Please go to one of the pages below:</p>
+  {% include("_navigation.html") %}
+</body>
+</html>

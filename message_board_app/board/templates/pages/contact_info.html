@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title> Contact Information - {% block contact_title %}{% endblock contact_title %}</title>
+</head>
+<body>
+<h1>Contact Us</h1>
+
+{% block content %}
+  <p>
+    For investment, contact us at 123-456-7890. <!-- When you use url_for(), Flask creates the full URL to the given view for you. This means that if you change the route in your Python code, then the URL in your templates updates automatically. -->
+  <br> 
+    For general questions, contact us at 987-654-3210.
+  <br>  
+    For tech support, contact us at 111-222-3333.
+  <p>
+    
+{% endblock content %}

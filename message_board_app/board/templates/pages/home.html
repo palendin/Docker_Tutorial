@@ -1,0 +1,15 @@
+<!--this connects to base.html-->
+{% extends 'base.html' %}
+
+
+<!--block header/content https://stackoverflow.com/questions/53383602/what-is-block-content-and-endblock-content-for-in-django-->
+<!--basically the header and content here will override the header and content in base/html -->
+{% block header %}
+  <h2>{% block title %}Home{% endblock title %}</h2>
+{% endblock header %}
+
+{% block content %}
+  <p>
+    Learn more about this project by visiting the <a href="{{ url_for('pages.about') }}">About page</a>. <!-- When you use url_for(), Flask creates the full URL to the given view for you. This means that if you change the route in your Python code, then the URL in your templates updates automatically. -->
+  </p>
+{% endblock content %}

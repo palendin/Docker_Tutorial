@@ -1,0 +1,39 @@
+<!--Templates are HTML files with the capability of rendering dynamic content sent over from your Flask views. 
+    For this, Flask uses the popular Jinja template engine, which you already installed as a dependency when you installed Flask.
+    With a template engine like Jinja, you can embed Python-like expressions into your templates to create dynamic web content. 
+    You can use loops, conditionals, and variables directly in your templates.
+    Jinja also supports template inheritance, allowing the creation of a base template that you can extend in child templates, 
+    promoting code reuse and a consistent layout across different pages of your project.-->
+
+    
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Message Board - {% block title %}{% endblock title %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}"> <!--this connects to styles.css, style should be at the <head> wrap-->
+</head>
+<body>
+  <!-- <div class="flash success">Everything worked!</div>
+  <div class="flash error">Oh no, something went wrong.</div> -->
+
+  {% for category, message in get_flashed_messages(with_categories=True) %} <!--get_flash_messages this retrives all flashes messages stored in the session to the user-->
+    <div class="flash {{ category }}">{{ message }}</div> <!-- class="flash {{ category }}" is used to style the flash message (see styles.css), and "{{ message }}" is used to display the flash message-->
+  {% endfor %}
+<h1>Welcome to Message Board</h1>
+
+{% include("_navigation.html") %} <!--this connects to _navigation.html, inserting the navigation menu into this position-->
+
+<section>
+  <header>
+    {% block header %}{% endblock header %} <!--placeholder blocks for dynamic content which will be overridden by the child templates-->
+  </header>
+  <main>
+    {% block content %}<p>No messages.</p>{% endblock content %} <!--placeholder blocks for dynamic content which will be overridden by the child templates-->
+  </main>
+</section>
+</body>
+</html> <!---->
+
+<!--Since both home.html and about.html extend base.html, 
+you didn’t need to make any changes in these templates to make the navigation menu appear. 
+That’s template inheritance in action!-->

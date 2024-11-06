@@ -1,0 +1,10 @@
+the message board contains the following features:
+
+- user registration/login (WIP)
+- routing to different links
+- user posting message
+- storing messages in database
+- user viewing messages
+- route error handling
+- success and error message
+- logging for troubleshooting
