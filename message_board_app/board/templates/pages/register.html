@@ -1,0 +1,35 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Make it responsive -->
+    <title>Register</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}"> <!-- Link to CSS -->
+</head>
+<body>
+    <!-- Display flashed messages, if any -->
+    {% for category, message in get_flashed_messages(with_categories=True) %}
+    <div class="flash {{ category }}">{{ message }}</div>
+    {% endfor %}
+    
+    <!-- Registration Form -->
+    <form method="post">
+        <!-- Username Entry Box -->
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" name="username" id="username" value="{{ request.form.get('username', '') }}" class="form-control">  
+        </div>
+
+        <!-- Password Entry Box -->
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password" value="{{ request.form.get('password', '') }}" class="form-control">
+        </div>
+
+        <!-- Submit Button -->
+        <div class="form-group">
+            <input type="submit" value="Create Account" class="submit-btn">
+        </div>
+    </form>
+</body>
+</html>

@@ -1,13 +1,17 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash, current_app
+from flask import Blueprint, render_template, request, redirect, url_for, flash, current_app, session
 from .models import Posts
 from .extensions import db
 
 bp = Blueprint("posts", __name__)
 
+
 @bp.route("/create", methods=("GET", "POST")) # GET: Used to display the form to create a post. POST: Used to submit the form and create a new post on the server.
 def create():
+    
+    if 'username' not in session:
+        return redirect(url_for('pages.login')) 
+    
     if request.method == "POST":
-        
         # get data from form
         author = request.form["author"]
         message = request.form["message"]
@@ -42,6 +46,9 @@ def create():
 @bp.route("/posts")
 def posts():
 
+    if 'username' not in session:
+        return redirect(url_for('pages.login')) 
+    
     # Query the database for all posts
     posts = Posts.query.all()  # This fetch all posts from database as a list of Post objects
 

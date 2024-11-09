@@ -117,3 +117,14 @@ form {
   background-color: #96faad;
   color: #1a0205; /* text color */
 }
+
+
+
+
+
+/* Logging button */
+#logging {
+  position: absolute; /* Make the logout element absolute */
+  top: 10px; /* Set top position from the edge */
+  right: 10px; /* Set right position from the edge */
+}
