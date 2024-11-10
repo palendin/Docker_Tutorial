@@ -1,6 +1,6 @@
 # As your Flask project grows, you have lots of view functions and other related bits of code that work together. 
 # Instead of adding all these directly to a basic app.py file, you can create blueprints that you register in your application factory
-from flask import Blueprint, render_template, url_for, redirect, request, session
+from flask import Blueprint, render_template, url_for, redirect, request, session, flash
 from .models import User
 from .extensions import db
 
@@ -34,7 +34,8 @@ def login():
             session.permanent = False  # Make the session permanent = False
             return redirect(url_for('pages.home'))
         else:
-            return 'Invalid credentials or account doesnt exist. Please try again.'
+            flash('Invalid credentials or account doesnt exist. Please try again.', category='error')
+            return redirect(url_for("pages.login"))
     return render_template('pages/login.html')  # Renders the login form
 
 # using the view functions to define routes

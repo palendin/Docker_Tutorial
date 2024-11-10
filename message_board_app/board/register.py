@@ -8,28 +8,38 @@ bp = Blueprint("registration", __name__)
 @bp.route("/register", methods=['GET', 'POST'])
 def register():
     # if 'username' not in session:
-    #     return redirect(url_for('pages.login')) 
+    #     return redirect(url_for('register.register')) 
     
     if request.method == "POST":
+              
         # get data from form
+        
         username = request.form.get("username")
-        password = request.form.get("password")
+        password = request.form.get("password") 
 
-        # Check if the user already exists by querying the database
+        # Check if the user already exists by querying the database columns
         existing_user = User.query.filter_by(username=username).first()
         if existing_user:
             flash("Username already exists. Please choose a different username.", category="error")
-
+        
         if username and password:
-            # create a new user instance
-            user = User(username=username, password=password)
             
-            # Add and commit the new post to the database
-            db.session.add(user)
-            db.session.commit()
+            # catch exception with flash message, re-render the registration template, allowing the user to try again
+            try:
+                # create a new user instance
+                user = User(username=username, password=password)
+                
+                # Add and commit the new post to the database
+                db.session.add(user)
+                db.session.commit()
 
-            flash("Thanks for registering!", category="success") 
-            return redirect(url_for("pages.home"))
+                flash("Thanks for registering!", category="success") 
+                return redirect(url_for("pages.login"))
+
+            except Exception as e:
+                flash("Account already exists. Please choose a different username.", category="error")
+                return render_template("pages/register.html")
+                
 
         else:
             # display error message

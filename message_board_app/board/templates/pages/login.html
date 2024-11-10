@@ -4,21 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--makeke it responsive, adjust layout base on screen size-->
     <title>Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}"> <!--this connects to styles.css, style should be at the <head> wrap-->
 </head>
 <body>
+    
+    {% for category, message in get_flashed_messages(with_categories=True) %} <!--get_flash_messages this retrives all flashes messages stored in the session to the user-->
+    <div class="flash {{ category }}">{{ message }}</div> <!-- class="flash {{ category }}" is used to style the flash message (see styles.css), and "{{ message }}" is used to display the flash message-->
+    {% endfor %}
+
     <h2>Login</h2>
-    <form action="/login" method="POST"> <!-- create a form tag for fill/submit, sents data to /login route in app.py using POST method-->
-        <label for="username">Username:</label><br>
-        <input type="text" id="username" name="username"><br><br> <!-- create input tag for user to type text format, with id referring to 'for' = "username", and name attribute is used to pass the information to server when form is submitted, so server side (Flask app)  needs to reference this name to extract  the form data-->
-        <label for="password">Password:</label><br>
-        <input type="password" id="password" name="password"><br><br>
-        <input type="submit" value="Login"> <!-- type is submit button, and value is what shows on button-->
+    <form action="/login" method="POST">
+        <div class="form-group">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" class="form-control">
+        </div>
+    
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" class="form-control">   
+        </div>
+        
+        <div class="form-group">
+        <input type="submit" value="Login" class="submit-btn">
+        </div>
     </form>
-
-    <form action="/register" method="POST"> <!--sents data to /register route in app.py using POST method-->
-        <input type="submit" value="Register"> <!-- type is submit button, and value is what shows on button-->
+    
+    
+    <form action="/register" method="GET">
+        <div class="form-group">
+        <input type="submit" value="Create Account" class="submit-btn">
+        </div>
     </form>
-
 
 </body>
 </html>

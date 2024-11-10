@@ -8,3 +8,15 @@ the message board contains the following features:
 - route error handling
 - success and error message
 - logging for troubleshooting
+
+
+
+docker compose up -d --build
+docker compose down -v
+
+# to run docker in a different machine
+docker tag image_name:latest docker_user/dockerhub_name:latest
+docker push docker_user/dockerhub_name:latest
+
+Go to different docker machine
+docker pull palendin/repo_name:image_name
